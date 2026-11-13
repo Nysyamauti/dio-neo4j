@@ -7,4 +7,4 @@ The **Neo4j Certification Bootcamp** by DIO focuses on the Neo4j native graph da
 This repository contains projects, queries and study notes covering native graph database architeture, from core modeling and Cypher querying to practical implementations aimed at earning the official **Neo4j Certified Professional** credential.
 
 ## Contents
-- [Class 01 - Graph and Neo4j Fundamentals](./01-fundamentals/README.md)
+* [Class 01 - Graph and Neo4j Fundamentals](./01-fundamentals/README.md)
