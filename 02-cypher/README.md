@@ -8,7 +8,7 @@ This module covers the core of basic and intermediate Cypher, including essentia
 ### Part 1 - Introduction to Cypher Query Language
 The first step includes the syntax structure and functions of the fundamental Cypher clauses.
 
-#### Essential for code structure
+#### Essential Code Structure
 * **`()`:** Represent **nodes** (entities).
 * **`[]`:** Represent **relationships**.
 * **`{}`:** Store **properties** (key-value pairs) in both nodes and relationships.
@@ -27,3 +27,8 @@ The first step includes the syntax structure and functions of the fundamental Cy
 
 #### Delete
 * **`Delete`:** Deletes nodes and relationships. Neo4j does not allow deleting a node that still has active relationships.
+
+### Part 2 - Mini Project: Music Recommendation Algorithm
+A practical hands-on challenge applying Cypher queries to build a graph-based music recommendation engine using nodes (`User`, `Song`, `Composer`, `Genre`) and interaction relationships (`LISTENED`, `LIKED`, `FOLLOWS`).
+
+* 👉 **[Access the Mini Project & Cypher Scripts](./mini-project/)**
