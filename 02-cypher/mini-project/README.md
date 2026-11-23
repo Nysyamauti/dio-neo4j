@@ -17,38 +17,37 @@ You have been hired to develop a music recommendation system that uses graphs to
 2. Run [`01-seed.cypher`](./queries/01-seed.cypher) to populate the database using `MERGE` statements.
 3. Execute the analytical queries from [`02-recommendations.cypher`](./queries/02-recommendations.cypher).
 
-* Neo4j/5.27-aura
+## Business Questions & Cypher Solutions
 
-## Difficults
-* Formalidades de Structure
-* Funcionalidade e regras do MERGE
-
-## Business ...
-1. Recomendação por Compositor Seguido (Artist-Based Recommendation):
-	• Pergunta: Quais músicas foram compostas por artistas que o usuário f1 segue, mas que ele ainda não ouviu? (Vai recomendar Alone).
-
+### 1. Artist-Based Recommendation
+**Question:** Which songs were composed by artists that user `f1` follows, but `f1` hasn't listened to yet?
+```cypher
 MATCH (u:User {name: 'f1'})-[:FOLLOWS]->(c:Composer)<-[:COMPOSED_BY]-(rec:Song)
 WHERE NOT (u)-[:LISTENED]->(rec)
 RETURN c.name AS Composer, rec.name AS RecommendedSong
+```
 
-2. Recomendação por Afinidade de Gênero (Content-Based Filtering):
-	• Pergunta: Com base no gênero das músicas que o usuário f1 curtiu (LIKED), quais outras músicas do mesmo gênero ele ainda não conhece? (Vai recomendar Alone e Happier).
-
+### 2. Genre-Based Recommendation (Content-Based Filtering)
+**Question:** Based on the genres of songs that `f1` liked, what other tracks from the same genre haven't they listened to?
+```cypher
 MATCH (u:User {name: 'f1'})-[:LIKED]->(s:Song)-[:BELONGS_TO]->(g:Genre)<-[:BELONGS_TO]-(rec:Song)
 WHERE NOT (u)-[:LISTENED]->(rec)
-RETURN DISTINCT rec.name AS MusicNotListening
+RETURN DISTINCT g.name AS Genre, rec.name AS RecommendedSong
+```
 
-3. Filtragem Colaborativa (Collaborative Filtering):
-	• Pergunta: Quais músicas foram curtidas por outros usuários que também ouviram as mesmas faixas que f1, excluindo o que f1 já ouviu? (Vai cruzar f1 com f2 através de Faded e recomendar Lose Yourself e Alone).
-
+### 3. Collaborative Filtering
+**Question:** Which songs were liked by other users who listened to the same tracks as `f1`?
+```cypher
 MATCH (u:User {name: 'f1'})-[:LISTENED]->(s:Song)<-[:LISTENED]-(other:User)-[:LIKED]->(rec:Song)
 WHERE NOT (u)-[:LISTENED]->(rec)
 RETURN DISTINCT other.name AS SimilarUser, rec.name AS RecommendedSong
+```
 
-4. Ranking de Popularidade (Aggregation & Ordering):
-	• Pergunta: Quais são as músicas mais ouvidas da plataforma somando a propriedade plays de todos os usuários? (Vai treinar SUM(), ORDER BY e LIMIT, essenciais para a certificação).
-
+### 4. Platform Popularity Ranking
+**Question:** What are the top 3 most played songs across all users?
+```cypher
 MATCH (:User)-[r:LISTENED]->(s:Song)
-RETURN s.name AS Song, sum(r.plays) AS TotalPlays
+RETURN s.name AS Song, SUM(r.plays) AS TotalPlays
 ORDER BY TotalPlays DESC
 LIMIT 3
+```
