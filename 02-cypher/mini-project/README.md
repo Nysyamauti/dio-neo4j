@@ -1,23 +1,23 @@
-# DIO challenge - Creating a Music Recommendation Algorithm with Graphs
+# 🚀 DIO challenge - Creating a Music Recommendation Algorithm with Graphs
 
-## Challenge Context
+## 🔎 Challenge Context
 You have been hired to develop a music recommendation system that uses graphs to identify listening patterns and suggest new tracks to users. The system must be able to:
 * Represent **users**, **songs**, **composers**, **genres** as graph nodes.
 * Represent interactions (like **listening**, **liking**, **following**) as relationships with properties.
 * Use **Cypher queries** to generate personalized recommendations based on graph connections.
 
-## Graph Data Model & Setup
+## ❗ Graph Data Model & Setup
 
 ### Nodes & Relationships
 * **Nodes:** `:User`, `:Song`, `:Composer`, `:Genre`
 * **Relationships:** `[:LISTENED {plays}]`, `[:LIKED]`, `[:FOLLOWS]`, `[:COMPOSED_BY {date}]`, `[:BELONGS_TO]`
 
-### How to Run
+### 💻 How to Run
 1. Open a free instance on **Neo4j AuraDB** (Query tab).
 2. Run [`01-seed.cypher`](./queries/01-seed.cypher) to populate the database using `MERGE` statements.
 3. Execute the analytical queries from [`02-recommendations.cypher`](./queries/02-recommendations.cypher).
 
-## Business Questions & Cypher Solutions
+## 🔨 Business Questions & Cypher Solutions
 
 ### 1. Artist-Based Recommendation
 **Question:** Which songs were composed by artists that user `f1` follows, but `f1` hasn't listened to yet?
@@ -55,7 +55,7 @@ LIMIT 3
 ## Graph Visualization
 > *Visual screenshots of the generated graph and query results from Neo4j AuraDB will be added here soon.*
 
-## Challenges & Key Learnings
+## Key Learnings
 * **Avoiding Duplicate Nodes with `MERGE`:** Learned why using `MERGE` on full paths creates duplicate nodes when part of the pattern is missing, and how to solve it by merging individual nodes before relationships.
 * **Relationship Direction & Uniqueness:** Understood how Cypher prevents traversing the same relationship twice within a single `MATCH` pattern and why arrow direction matters for readability and accuracy.
 * **Implicit Aggregation:** Practiced using `SUM()`, `ORDER BY`, and `LIMIT` without needing a SQL-style `GROUP BY` clause.
