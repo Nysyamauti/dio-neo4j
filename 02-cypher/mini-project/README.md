@@ -51,3 +51,6 @@ RETURN s.name AS Song, SUM(r.plays) AS TotalPlays
 ORDER BY TotalPlays DESC
 LIMIT 3
 ```
+
+## Graph Visualization
+> *Visual screenshots of the generated graph and query results from Neo4j AuraDB will be added here soon.*
