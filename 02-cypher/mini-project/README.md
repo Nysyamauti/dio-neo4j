@@ -53,7 +53,15 @@ LIMIT 3
 ```
 
 ## Graph Visualization
-> *Visual screenshots of the generated graph and query results from Neo4j AuraDB will be added here soon.*
+
+### 1. Database Schema (`CALL db.schema.visualization()`)
+![Database Schema](./assets/01-schema-visualization.png)
+
+### 2. Populated Music Graph (`MATCH (n)-[r]->(m) RETURN n, r, m`)
+![Full Populated Graph](./assets/02-full-graph.png)
+
+### 3. Artist-Based Recommendation Path
+![Recommendation Path](./assets/03-recommendation-result.png)
 
 ## Key Learnings
 * **Avoiding Duplicate Nodes with `MERGE`:** Learned why using `MERGE` on full paths creates duplicate nodes when part of the pattern is missing, and how to solve it by merging individual nodes before relationships.
