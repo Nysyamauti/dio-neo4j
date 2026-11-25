@@ -8,3 +8,5 @@ This repository contains projects, queries and study notes covering native graph
 
 ## Contents
 * [Class 01 - Fundamentals & Environment](./01-fundamentals/README.md)
+* [Class 02 - Basic to Intermediate Cypher](./02-cypher/README.md)
+* [Class 03 - Graph Data Modeling](./03-data-modeling/README.md)
